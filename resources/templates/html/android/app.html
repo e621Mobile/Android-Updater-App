@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>
+			Apks
+		</title>
+	</head>
+	<body>
+		{% for i in apks %}
+			<a href="{% url 'android.views.get_apk' app i.local_id %}">
+				{{ i.local_id }}: {{ i.app.title }} {{ i.version_name }}
+			</a>
+			{% if i.beta %}
+				(beta)
+			{% endif %}
+			<br/>
+		{% endfor %}
+		<br/>
+		{% if user.is_authenticated %}
+			<form method="POST" action="{% url 'android.views.add_apk' %}" enctype="multipart/form-data">
+				<input type="hidden" name="app" value="{{ app }}">
+				<input type="file" name="apk">
+				<input type="submit" value="Upload">
+				<br/>
+				<input type="checkbox" name="beta"> Beta
+			</form>
+		{% endif %}
+	</body>
+</html>

@@ -1,0 +1,5 @@
+{% for app in apps %}
+	<a href="{% url 'android.views.app' app.app_id %}">
+		{{ app.title }}
+	</a>
+{% endfor %}
